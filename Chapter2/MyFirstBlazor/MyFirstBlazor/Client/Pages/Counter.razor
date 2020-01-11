@@ -1,0 +1,32 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>
+  Current count:
+  <span class="@backgroundColor">@currentCount</span>
+</p>
+
+<button class="btn btn-primary"
+        disabled="@(currentCount >= 10)"
+        @onclick="IncrementCount">
+  Click me
+</button>
+
+<button class="btn btn-primary"
+        disabled="@(currentCount >= 10)"
+        @onclick="@(() => currentCount += 1)">
+  Click me
+</button>
+
+@code {
+  private int currentCount = 0;
+  private string backgroundColor = "red-background";
+
+  private void IncrementCount(MouseEventArgs e)
+  {
+    currentCount++;
+    backgroundColor = (currentCount % 2 == 0) ?
+                      "red-background" : "yellow-background";
+  }
+}
