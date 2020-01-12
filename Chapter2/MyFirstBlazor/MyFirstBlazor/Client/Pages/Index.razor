@@ -5,3 +5,17 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<LifeCycle Param="@counter"/>
+
+<button @onclick="NextCounter">Next</button>
+
+@code {
+
+    private int counter;
+
+    private void NextCounter()
+    {
+      counter += 1;
+    }
+}
