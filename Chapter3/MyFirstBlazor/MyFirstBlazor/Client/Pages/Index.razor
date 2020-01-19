@@ -11,16 +11,25 @@
 
 <button @onclick="@ToggleAlert">Toggle</button>
 
+<GrandMother>
+  <GrandChild />
+  <DismissableAlert Show="true">
+    <GrandChild />
+  </DismissableAlert>
+</GrandMother>
+
+<GrandChild />
+
 @code {
 
-    MyFirstBlazor.Components.DismissableAlert x;
+  MyFirstBlazor.Components.DismissableAlert x;
 
-    private DismissableAlert alert;
+  private DismissableAlert alert;
 
-    public bool ShowAlert { get; set; } = true;
+  public bool ShowAlert { get; set; } = true;
 
-    public void ToggleAlert()
-    {
-      ShowAlert = !ShowAlert;
-    }
+  public void ToggleAlert()
+  {
+    ShowAlert = !ShowAlert;
+  }
 }
