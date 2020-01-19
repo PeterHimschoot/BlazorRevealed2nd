@@ -74,7 +74,7 @@
 <CustomerEntry Title="Please enter your details below"
                ButtonTitle="Checkout"
                ButtonClass="btn btn-primary"
-               Customer="@State.Basket.Customer"
+               @bind-Customer="@State.Basket.Customer"
                Submit="@PlaceOrder"
                />
 

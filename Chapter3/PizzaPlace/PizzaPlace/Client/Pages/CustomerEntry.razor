@@ -4,6 +4,8 @@
           Model="@Customer">
   <DataAnnotationsValidator />
 
+  <InputWatcher @ref="inputWatcher" FieldChanged="@FieldChanged" />
+
   <div class="form-group row mb-1">
     <label class="col-sm-3 col-form-label"
            for="FirstName">Name:</label>
@@ -33,6 +35,7 @@
   </div>
   <div class="form-group mb-0">
     <button type="submit"
+            disabled="@isInvalid"
             id="BtnRegister" class="@ButtonClass">
       @ButtonTitle
     </button>
@@ -40,6 +43,9 @@
 </EditForm>
 
 @code {
+  private InputWatcher inputWatcher;
+  private bool isInvalid = true;
+
   [Parameter]
   public string Title { get; set; }
 
@@ -53,5 +59,14 @@
   public Customer Customer { get; set; }
 
   [Parameter]
+  public EventCallback<Customer> CustomerChanged { get; set; }
+
+  [Parameter]
   public EventCallback Submit { get; set; }
+
+  private void FieldChanged(string fieldName)
+  {
+    CustomerChanged.InvokeAsync(Customer);
+    isInvalid = !inputWatcher.Validate();
+  }
 }
