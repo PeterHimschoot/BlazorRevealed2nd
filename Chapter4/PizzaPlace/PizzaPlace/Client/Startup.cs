@@ -1,17 +1,18 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using PizzaPlace.Shared;
 
 namespace PizzaPlace.Client
 {
-    public class Startup
+  public class Startup
+  {
+    public void ConfigureServices(IServiceCollection services)
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-        }
-
-        public void Configure(IComponentsApplicationBuilder app)
-        {
-            app.AddComponent<App>("app");
-        }
+      services.AddTransient<IMenuService, HardCodedMenuService>();
+      services.AddTransient<IOrderService, ConsoleOrderService>();
     }
+
+    public void Configure(IComponentsApplicationBuilder app) 
+      => app.AddComponent<App>("app");
+  }
 }
