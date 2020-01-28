@@ -9,6 +9,8 @@ namespace PizzaPlace.Server
       : base(options) { }
 
     public DbSet<Pizza> Pizzas { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders{ get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,6 +21,26 @@ namespace PizzaPlace.Server
       pizzaEntity.HasKey(pizza => pizza.Id);
       pizzaEntity.Property(pizza => pizza.Price)
         .HasColumnType("money");
+
+      var customerEntity = modelBuilder.Entity<Customer>();
+      customerEntity.HasKey(customer => customer.Id);
+      customerEntity.HasOne(customer => customer.Order)
+                    .WithOne(order => order.Customer)
+                    .HasForeignKey<Order>(
+                       order => order.CustomerId);
+
+      var orderEntity = modelBuilder.Entity<Order>();
+      orderEntity.HasKey(order => order.Id);
+      orderEntity.HasMany(order => order.PizzaOrders)
+                 .WithOne(pizzaOrder => pizzaOrder.Order);
+
+      modelBuilder.Entity<PizzaOrder>()
+        .HasOne(po => po.Pizza)
+        .WithMany();
+
+      //pizzaEntity.HasMany(pizza => pizza.PizzaOrders)
+      //           .WithOne(pizzaOrder => pizzaOrder.Pizza);
+
     }
   }
 }
