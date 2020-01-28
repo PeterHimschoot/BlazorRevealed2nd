@@ -10,7 +10,7 @@ namespace PizzaPlace.Client
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddTransient<IMenuService, MenuService>();
-      services.AddTransient<IOrderService, ConsoleOrderService>();
+      services.AddTransient<IOrderService, OrderService>();
     }
 
     public void Configure(IComponentsApplicationBuilder app) 

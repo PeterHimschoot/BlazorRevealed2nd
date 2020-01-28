@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaPlace.Server;
 
 namespace PizzaPlace.Server.Migrations
 {
     [DbContext(typeof(PizzaPlaceDbContext))]
-    partial class PizzaPlaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200128154920_HandlingOrders")]
+    partial class HandlingOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
