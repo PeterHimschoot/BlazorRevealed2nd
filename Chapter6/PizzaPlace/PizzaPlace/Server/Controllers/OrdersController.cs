@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using PizzaPlace.Shared;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PizzaPlace.Shared;
 
 namespace PizzaPlace.Server.Controllers
 {
@@ -20,23 +17,23 @@ namespace PizzaPlace.Server.Controllers
     [HttpPost("/orders")]
     public IActionResult CreateOrder([FromBody] Basket basket)
     {
-      var customer = basket.Customer;
+      Customer customer = basket.Customer;
       var order = new Order()
       {
         PizzaOrders = new List<PizzaOrder>()
       };
       customer.Order = order;
 
-      foreach(var pizzaId in basket.Orders)
+      foreach (int pizzaId in basket.Orders)
       {
-        var pizza = db.Pizzas.Single(p => p.Id == pizzaId);
+        Pizza pizza = this.db.Pizzas.Single(p => p.Id == pizzaId);
         order.PizzaOrders.Add(new PizzaOrder { Pizza = pizza, Order = order });
       }
 
       order.TotalPrice = order.PizzaOrders.Sum(po => po.Pizza.Price);
 
-      db.Customers.Add(customer);
-      db.SaveChanges();
+      this.db.Customers.Add(customer);
+      this.db.SaveChanges();
 
       return Ok();
     }

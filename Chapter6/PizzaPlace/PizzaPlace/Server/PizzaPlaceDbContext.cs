@@ -37,10 +37,6 @@ namespace PizzaPlace.Server
       modelBuilder.Entity<PizzaOrder>()
         .HasOne(po => po.Pizza)
         .WithMany();
-
-      //pizzaEntity.HasMany(pizza => pizza.PizzaOrders)
-      //           .WithOne(pizzaOrder => pizzaOrder.Pizza);
-
     }
   }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PizzaPlace.Shared
+﻿namespace PizzaPlace.Shared
 {
   public class PizzaOrder
   {
