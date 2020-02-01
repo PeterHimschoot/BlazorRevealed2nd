@@ -12,5 +12,7 @@ namespace PizzaPlace.Shared
 
     public decimal TotalPrice
       => Basket.Orders.Sum(id => Menu.GetPizza(id).Price);
+
+    public Pizza CurrentPizza { get; set; } = new Pizza() { Name = "xxx" };
   }
 }

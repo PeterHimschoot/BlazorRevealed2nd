@@ -22,7 +22,8 @@ else
     <PizzaItem Pizza="@pizza"
                ButtonClass="btn btn-success"
                ButtonTitle="Order"
-               Selected="@Selected" />
+               Selected="@Selected"
+               ShowPizzaInformation="@ShowPizzaInformation"/>
   }
 }
 
@@ -35,4 +36,8 @@ else
 
   [Parameter]
   public EventCallback<Pizza> Selected { get; set; }
+
+  [Parameter]
+  public Action<Pizza> ShowPizzaInformation { get; set; }
+
 }

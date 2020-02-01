@@ -1,6 +1,16 @@
 ﻿<div class="row">
   <div class="col">
-    @Pizza.Name
+    @if (ShowPizzaInformation is object)
+    {
+      <a href=""
+         @onclick="@(() => ShowPizzaInformation?.Invoke(Pizza))">
+        @Pizza.Name
+      </a>
+    }
+    else
+    {
+      @Pizza.Name
+    }
   </div>
   <div class="col">
     @Pizza.Price
@@ -32,4 +42,7 @@
 
   private string SpicinessImage(Spiciness spiciness)
       => $"images/{spiciness.ToString().ToLower()}.png";
+
+  [Parameter]
+  public Action<Pizza> ShowPizzaInformation { get; set; }
 }
