@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using PizzaPlace.Shared;
+using System.Threading.Tasks;
 
 namespace PizzaPlace.Client
 {
-    public class Program
+  public class Program
+  {
+    public static async Task Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
+      var builder = WebAssemblyHostBuilder.CreateDefault(args);
+      builder.RootComponents.Add<App>("app");
+      await builder.Build().RunAsync();
     }
+  }
 }
