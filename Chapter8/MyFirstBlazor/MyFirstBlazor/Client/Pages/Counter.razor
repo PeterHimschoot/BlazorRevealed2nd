@@ -5,11 +5,17 @@
 @inject NavigationManager uriHelper
 @inject IJSRuntime JSRuntime
 
+@using MyFirstBlazor.Client.Services
+@inject ILocalStorage LocalStorage
+
 <h1>Counter</h1>
 
 <p>
   Current count:
   <span>@CurrentCount</span>
+
+  <input @ref="inputElement" @bind="CurrentCount" />
+
 </p>
 
 <button class="btn btn-primary"
@@ -25,17 +31,26 @@
 
 @code {
 
+  private ElementReference inputElement;
+
   protected override async Task OnInitializedAsync()
   {
-    try
+    //var objRef = DotNetObjectReference.Create(this);
+    //await JSRuntime.InvokeVoidAsync("blazorLocalStorage.watch", objRef);
+    await LocalStorage.WatchAsync(this);
+
+    //int? c = await JSRuntime.InvokeAsync<int?>("blazorLocalStorage.get", nameof(CurrentCount));
+
+    int? c = await LocalStorage.GetProperty<int?>(nameof(CurrentCount));
+    if (c.HasValue)
     {
-      int? c = await JSRuntime.InvokeAsync<int?>("blazorLocalStorage.get", nameof(CurrentCount));
-      if (c.HasValue)
-      {
-        currentCount = c.Value;
-      }
+      currentCount = c.Value;
     }
-    catch { }
+  }
+
+  protected override async Task OnAfterRenderAsync(bool first)
+  {
+    await JSRuntime.InvokeVoidAsync("blazorFocus.set", inputElement);
   }
 
   private int currentCount = 0;
@@ -49,13 +64,29 @@
       if (currentCount != value)
       {
         currentCount = value;
-        JSRuntime.InvokeAsync<string>("blazorLocalStorage.set", nameof(CurrentCount), currentCount);
+
+        LocalStorage.SetProperty<int>(nameof(CurrentCount), currentCount);
+
+        // JSRuntime.InvokeAsync<string>("blazorLocalStorage.set", nameof(CurrentCount), currentCount);
       }
     }
   }
 
+  [JSInvokable]
+  public async Task UpdateCounter()
+  {
+    Console.WriteLine("Update");
+    //int? c = await JSRuntime.InvokeAsync<int?>("blazorLocalStorage.get", nameof(CurrentCount));
+    int? c = await LocalStorage.GetProperty<int?>(nameof(CurrentCount));
+    if (c.HasValue)
+    {
+      currentCount = c.Value;
+    }
+    this.StateHasChanged();
+  }
+
   private void IncrementCount()
-  => CurrentCount += 1;
+=> CurrentCount += 1;
 
   private void StartFrom50()
   => uriHelper.NavigateTo("/Counter/50");
