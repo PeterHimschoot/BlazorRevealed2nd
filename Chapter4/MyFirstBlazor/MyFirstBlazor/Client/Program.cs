@@ -12,6 +12,7 @@ namespace MyFirstBlazor.Client
     public static async Task Main(string[] args)
     {
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
       builder.Services.AddSingleton<IProductsService, HardCodedProductService>();
 
       builder.RootComponents.Add<App>("app");
