@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MyFirstBlazor.Client.Services;
 using MyFirstBlazor.Shared;
@@ -15,6 +15,7 @@ namespace MyFirstBlazor.Client
       builder.Services.AddSingleton<IProductsService, HardCodedProductService>();
       builder.RootComponents.Add<App>("app");
 
+      builder.Services.AddBaseAddressHttpClient();
       await builder.Build().RunAsync();
     }
   }

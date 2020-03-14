@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using BlazorLifetime.Shared;
 using System.Threading.Tasks;
@@ -14,6 +14,7 @@ namespace BlazorLifetime.Client
 
       builder.Services.AddLifetime();
 
+      builder.Services.AddBaseAddressHttpClient();
       builder.RootComponents.Add<App>("app");
       await builder.Build().RunAsync();
     }

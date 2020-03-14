@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MyFirstBlazor.Client.Services;
 using System.Threading.Tasks;
@@ -15,6 +15,7 @@ namespace MyFirstBlazor.Client
 
       builder.RootComponents.Add<App>("app");
 
+      builder.Services.AddBaseAddressHttpClient();
       await builder.Build().RunAsync();
     }
   }
