@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Shared\BlazorLifetime.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

@@ -60,10 +60,11 @@ else
   </ListView>
 
   @forecastTemplate(
-    new WeatherForecast { 
-      Date = DateTime.Now, 
-      TemperatureC = 26, 
-      Summary = "Nice!" 
+    new WeatherForecast
+      {
+        Date = DateTime.Now,
+      TemperatureC = 26,
+      Summary = "Nice!"
     })
 }
 
@@ -76,7 +77,7 @@ private WeatherForecast[] forecasts;
 
 protected override async Task OnInitializedAsync()
 {
-forecasts = await Http.GetJsonAsync<WeatherForecast[]>("WeatherForecast");
+forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
 }
 
 }
