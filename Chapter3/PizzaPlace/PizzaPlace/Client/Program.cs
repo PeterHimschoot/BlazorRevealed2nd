@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using PizzaPlace.Shared;
 using System.Threading.Tasks;
 
 namespace PizzaPlace.Client
@@ -11,7 +10,7 @@ namespace PizzaPlace.Client
     {
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
       builder.RootComponents.Add<App>("app");
-      
+
       builder.Services.AddBaseAddressHttpClient();
       await builder.Build().RunAsync();
     }
