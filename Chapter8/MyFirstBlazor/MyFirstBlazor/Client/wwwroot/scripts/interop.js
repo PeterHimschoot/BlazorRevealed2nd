@@ -1,6 +1,6 @@
 ﻿(function () {
   window.blazorLocalStorage = {
-    get: key => key in localStorage ? JSON.parse(localStorage[key]) : null,
+    get: (key, defaultValue) => key in localStorage ? JSON.parse(localStorage[key]) : defaultValue,
     set: (key, value) => { localStorage[key] = JSON.stringify(value); },
     delete: key => { delete localStorage[key]; },
     watch: async (instance) => {

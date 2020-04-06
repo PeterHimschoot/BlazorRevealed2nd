@@ -11,8 +11,8 @@ namespace MyFirstBlazor.Client.Services
     public LocalStorage(IJSRuntime jsRuntime)
     => this.jsRuntime = jsRuntime;
 
-    public async Task<T> GetProperty<T>(string propName)
-      => await this.jsRuntime.InvokeAsync<T>("blazorLocalStorage.get", propName);
+    public async Task<T> GetProperty<T>(string propName, T defaultValue = default)
+      => await this.jsRuntime.InvokeAsync<T>("blazorLocalStorage.get", propName, defaultValue);
 
     public async Task<object> SetProperty<T>(string propName, T value)
       => await this.jsRuntime.InvokeAsync<object>("blazorLocalStorage.set", propName, value);

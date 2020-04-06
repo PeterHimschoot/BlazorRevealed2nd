@@ -41,11 +41,7 @@
 
     //int? c = await JSRuntime.InvokeAsync<int?>("blazorLocalStorage.get", nameof(CurrentCount));
 
-    int? c = await LocalStorage.GetProperty<int?>(nameof(CurrentCount));
-    if (c.HasValue)
-    {
-      currentCount = c.Value;
-    }
+    currentCount = await LocalStorage.GetProperty<int>(nameof(CurrentCount));
   }
 
   protected override async Task OnAfterRenderAsync(bool first)
