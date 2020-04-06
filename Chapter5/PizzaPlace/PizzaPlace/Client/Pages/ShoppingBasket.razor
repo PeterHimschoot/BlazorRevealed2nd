@@ -7,7 +7,7 @@
     <PizzaItem Pizza="@pizza"
                ButtonTitle="Remove"
                ButtonClass="btn btn-danger"
-               Selected="@(async (p)
+               Selected="@(async (_)
                  => await Selected.InvokeAsync(pos))" />
   }
   <div class="row">
