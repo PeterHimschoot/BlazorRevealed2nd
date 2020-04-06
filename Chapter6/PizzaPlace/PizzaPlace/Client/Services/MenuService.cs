@@ -2,6 +2,7 @@
 using PizzaPlace.Shared;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PizzaPlace.Client.Services
@@ -16,7 +17,7 @@ namespace PizzaPlace.Client.Services
 
     public async Task<Menu> GetMenu()
     {
-      Pizza[] pizzas = await this.httpClient.GetJsonAsync<Pizza[]>("/pizzas");
+      Pizza[] pizzas = await this.httpClient.GetFromJsonAsync<Pizza[]>("/pizzas");
       return new Menu { Pizzas = pizzas.ToList() };
     }
   }
