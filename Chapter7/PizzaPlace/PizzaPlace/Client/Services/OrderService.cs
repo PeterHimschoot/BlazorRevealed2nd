@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PizzaPlace.Shared;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PizzaPlace.Client.Services
@@ -13,6 +14,6 @@ namespace PizzaPlace.Client.Services
       => this.httpClient = httpClient;
 
     public async Task PlaceOrder(Basket basket)
-      => await this.httpClient.PostJsonAsync("/orders", basket);
+      => await this.httpClient.PostAsJsonAsync("/orders", basket);
   }
 }
