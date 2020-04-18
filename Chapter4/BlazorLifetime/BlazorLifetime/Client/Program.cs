@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using BlazorLifetime.Shared;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using BlazorLifetime.Client;
 
@@ -14,7 +16,7 @@ namespace BlazorLifetime.Client
 
       builder.Services.AddLifetime();
 
-      builder.Services.AddBaseAddressHttpClient();
+      builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.RootComponents.Add<App>("app");
       await builder.Build().RunAsync();
     }
