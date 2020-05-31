@@ -33,6 +33,8 @@
 
   private ElementReference inputElement;
 
+    // If you are doing this with Blazor Server, move this logic into OnAfterRenderAsync
+    // Because data has changed, you should also add StateHasChanged()
   protected override async Task OnInitializedAsync()
   {
     //var objRef = DotNetObjectReference.Create(this);
